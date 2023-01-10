@@ -17,19 +17,20 @@ class Berita extends CI_Controller {
 	//listing data berita
 	public function index()
 	{
+		$cari = $this->input->post('cari');
 		$site	= $this->konfigurasi_model->listing();
 		//ambil data total
 		$total	= $this->berita_model->total_berita();
 		//paginasi start
 		$this->load->library('pagination');
-		
+
 		$config['base_url'] 		= base_url().'berita/index/';
 		$config['total_rows'] 		= $total->total;
 		$config['use_page_numbers']	= TRUE;
-		$config['per_page'] 		= 12;
+		$config['per_page'] 		= 3;
 		$config['uri_segment'] 		= 3;
 		$config['num_links'] 		= 5;
-		$config['full_tag_open'] 	= '<ul class="pagination">';
+		$config['full_tag_open'] 	= '<ul class="pagination-black">';
 		$config['full_tag_close'] 	= '</ul>';
 		$config['first_link'] 		= 'First';
 		$config['first_tag_open'] 	= '<li>';
@@ -49,7 +50,7 @@ class Berita extends CI_Controller {
 		$this->pagination->initialize($config);
 		//Ambil data berita
 		$page 	= ($this->uri->segment(3)) ? ($this->uri->segment(3)-1) * $config['per_page']:0;
-		$berita = $this->berita_model->berita($config['per_page'],$page);
+		$berita = $this->berita_model->berita($config['per_page'],$page,$cari);
 		//paginasi end
 		$data 	= array('title'		=> 'Berita',
 						'site'		=> $site,

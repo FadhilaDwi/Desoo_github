@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col-6 col-md-3 p-b-30 m-l-r-auto input-group">
 					<input type="text" name="cari" class="form-control border" placeholder="Cari Nama Surat" >
-					<button type="submit" class="btn btn-primary">
+					<button type="submit" class="btn btn-search">
 						<i class="fa fa-search"></i>
 					</button>
 				</div>

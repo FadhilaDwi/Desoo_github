@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class berita_model extends CI_Model {
@@ -53,12 +53,15 @@ class berita_model extends CI_Model {
 	}
 
 	//berita
-	public function berita($limit,$start)
+	public function berita($limit=null,$start=null,$cari=null)
 	{
 		$this->db->from('berita');
 		//JOIN
 		$this->db->join('users', 'users.id_user = berita.id_user', 'left');
 		//END JOIN
+		if ($cari!=null || $cari!='') {
+			$this->db->like('berita.judul_berita', $cari);
+		}
 		$this->db->where('berita.status_berita', 'Tampilkan');
 		$this->db->group_by('berita.id_berita');
 		$this->db->order_by('id_berita', 'desc');
